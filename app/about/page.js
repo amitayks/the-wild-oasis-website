@@ -1,3 +1,6 @@
+export const metadata = {
+  title: "about",
+};
 function page() {
   return <h1>about the wild oasis</h1>;
 }
