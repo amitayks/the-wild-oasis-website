@@ -3,7 +3,7 @@ import Image from "next/image";
 import { getCabin, getCabins } from "@/app/_lib/data-service";
 
 export const generateMetadata = async ({ params }) => {
-  const { cabinId } = params;
+  const { cabinId } = await params;
   const { name, maxCapacity } = await getCabin(cabinId);
 
   return {
