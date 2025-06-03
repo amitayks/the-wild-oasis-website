@@ -1,33 +1,28 @@
 "use client";
+
 import { isWithinInterval } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import { useResevation } from "./ResevationContext";
 
 function isAlreadyBooked(range, datesArr) {
   return (
-    range.from &&
-    range.to &&
+    range?.from &&
+    range?.to &&
     datesArr.some((date) =>
       isWithinInterval(date, { start: range.from, end: range.to })
     )
   );
 }
 
-function DateSelector() {
-  // CHANGE
-  const regularPrice = 23;
-  const discount = 23;
-  const numNights = 23;
-  const cabinPrice = 23;
-  const range = { from: null, to: null };
-
-  // SETTINGS
-  const minBookingLength = 1;
-  const maxBookingLength = 23;
+function DateSelector({ cabin, settings, bookedDates }) {
+  const { regularPrice, discount, numNights, cabinPrice } = cabin || {};
+  const { minBookingLength, maxBookingLength } = settings || {};
+  const { range, setRange, resetRange } = useResevation();
 
   return (
-    <div className='flex flex-col justify-between'>
-      <DayPicker
+    <div className='flex flex-col justify-between '>
+      {/* <DayPicker
         className='pt-12 place-self-center'
         mode='range'
         min={minBookingLength + 1}
@@ -37,6 +32,20 @@ function DateSelector() {
         toYear={new Date().getFullYear() + 5}
         captionLayout='dropdown'
         numberOfMonths={2}
+      /> */}
+      <DayPicker
+        className='pt-12 place-self-center'
+        mode='range'
+        captionLayout='dropdown'
+        numberOfMonths={2}
+        onSelect={setRange}
+        selected={range}
+        defaultMonth={new Date()}
+        strartMonth={new Date()}
+        endMonth={new Date(2025, 8)}
+        min={minBookingLength + 1}
+        max={maxBookingLength}
+        hidden={{ before: new Date() }}
       />
 
       <div className='flex items-center justify-between px-8 bg-accent-500 text-primary-800 h-[72px]'>
@@ -67,10 +76,10 @@ function DateSelector() {
           ) : null}
         </div>
 
-        {range.from || range.to ? (
+        {range?.from || range?.to ? (
           <button
             className='border border-primary-800 py-2 px-4 text-sm font-semibold'
-            onClick={() => resetRange()}
+            onClick={resetRange}
           >
             Clear
           </button>
