@@ -1,14 +1,24 @@
-import Image from "next/image";
+"use client";
 
-function UpdateProfileForm({ children }) {
-  const countryFlag = "bg.png";
+import { updateGuest } from "@/app/_lib/action";
+import SpinnerMini from "./SpinnerMini";
+import { useActionState } from "react";
+
+function UpdateProfileForm({ children, guest }) {
+  const [state, formAction, isPending] = useActionState(updateGuest, guest);
+  const { fullName, nationalID, countryFlag, email } = guest || {};
 
   return (
-    <form className='bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col'>
+    <form
+      action={formAction}
+      className='bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col'
+    >
       <div className='space-y-2'>
         <label>Full name</label>
         <input
           disabled
+          name='fullName'
+          defaultValue={fullName}
           className='px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400'
         />
       </div>
@@ -17,6 +27,8 @@ function UpdateProfileForm({ children }) {
         <label>Email address</label>
         <input
           disabled
+          name='email'
+          defaultValue={email}
           className='px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400'
         />
       </div>
@@ -24,14 +36,11 @@ function UpdateProfileForm({ children }) {
       <div className='space-y-2'>
         <div className='flex items-center justify-between'>
           <label htmlFor='nationality'>Where are you from?</label>
-          <div className='relative '>
-            {/* <Image
-                src={countryFlag}
-              fill
-              alt='Country flag'
-              className='h-5 rounded-sm object-cover'
-            /> */}
-          </div>
+          <img
+            src={countryFlag}
+            alt='Country flag'
+            className='h-5 rounded-sm '
+          />
         </div>
 
         {children}
@@ -41,13 +50,17 @@ function UpdateProfileForm({ children }) {
         <label htmlFor='nationalID'>National ID number</label>
         <input
           name='nationalID'
+          defaultValue={nationalID}
           className='px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm'
         />
       </div>
 
       <div className='flex justify-end items-center gap-6'>
-        <button className='bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300'>
-          Update profile
+        <button
+          disabled={isPending}
+          className='bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300'
+        >
+          {isPending ? <SpinnerMini className='mx-10' /> : " Update profile"}
         </button>
       </div>
     </form>

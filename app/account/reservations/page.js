@@ -1,14 +1,16 @@
-import ReservationCard from "@/app/_components/ReservationCard";
 import Link from "next/link";
+import { auth } from "@/app/_lib/auth";
+import { getBookings } from "@/app/_lib/data-service";
+import ReservationCard from "@/app/_components/ReservationCard";
 
 export const metadata = {
   title: "Your Reservations",
   description: "View and manage your reservations.",
 };
 
-export default function Page() {
-  // CHANGE
-  const bookings = [];
+export default async function Page() {
+  const session = await auth();
+  const bookings = await getBookings(session?.user?.id);
 
   return (
     <div>

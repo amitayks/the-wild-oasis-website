@@ -22,17 +22,6 @@ function DateSelector({ cabin, settings, bookedDates }) {
 
   return (
     <div className='flex flex-col justify-between '>
-      {/* <DayPicker
-        className='pt-12 place-self-center'
-        mode='range'
-        min={minBookingLength + 1}
-        max={maxBookingLength}
-        fromMonth={new Date()}
-        fromDate={new Date()}
-        toYear={new Date().getFullYear() + 5}
-        captionLayout='dropdown'
-        numberOfMonths={2}
-      /> */}
       <DayPicker
         className='pt-12 place-self-center'
         mode='range'
