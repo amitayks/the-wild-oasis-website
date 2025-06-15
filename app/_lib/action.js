@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "./auth";
 import supabase from "./supabase";
 import { getBookings } from "./data-service";
+import { redirect } from "next/navigation";
 
 export async function updateGuest(oldFormData, formData) {
   const session = await auth();
@@ -37,18 +38,24 @@ export async function updateGuest(oldFormData, formData) {
 }
 
 export async function updateBooking(formData) {
-  console.log("Updating booking with formData:", formData);
-
   const session = await auth();
   if (!session) throw new Error("You must be signed in to update a booking");
 
-  const numGuests = formData.get("numGuests");
-  const observations = formData.get("observations");
-  const hasBreakfast = formData.get("hasBreakfast") === "on";
   const bookingId = formData.get("bookingId");
-  const dataToUpdate = { numGuests, hasBreakfast, observations };
+  const guestBooking = (await getBookings(session.user.id))
+    .map((booking) => booking.id)
+    .includes(Number(bookingId));
 
-  const { data, error } = await supabase
+  if (!guestBooking)
+    throw new Error("Booking not found or does not belong to the user");
+
+  const dataToUpdate = {
+    numGuests: formData.get("numGuests"),
+    hasBreakfast: formData.get("hasBreakfast"),
+    observations: formData.get("observations"),
+  };
+
+  const { error } = await supabase
     .from("bookings")
     .update(dataToUpdate)
     .eq("id", bookingId);
@@ -57,20 +64,20 @@ export async function updateBooking(formData) {
     throw new Error("Booking could not be updated");
   }
 
-  console.log(data);
-
-  revalidatePath("/account/resevations");
+  revalidatePath("/account/reservations");
+  redirect("/account/reservations");
 }
 
 export async function deleteBooking(bookingId) {
+  console.log("click");
   const session = await auth();
   if (!session) throw new Error("You must be signed in to delete a booking");
 
-  const guestBooking = (await getBookings(session.user.id))
-    .map((booking) => booking.id)
-    .includes(bookingId);
+  const guestBooking = (await getBookings(session.user.id)).map(
+    (booking) => booking.id
+  );
 
-  if (!guestBooking)
+  if (!guestBooking.includes(bookingId))
     throw new Error("Booking not found or does not belong to the user");
 
   const { error } = await supabase

@@ -16,8 +16,7 @@ export default async function UpdateReservForm({
   return (
     <div className='max-w-6xl mx-auto px-6 py-8'>
       <form action={updateBooking} className='grid lg:grid-cols-2 gap-8'>
-        <input hidden name='guestId' defaultValue={guest.id} />
-        <input hidden name='bookingId' defaultValue={bookingId} />
+        <input type='hidden' name='bookingId' defaultValue={bookingId} />
         {/* Left Column - Form */}
         <div className='space-y-6'>
           <GuestInformation guest={guest} />
