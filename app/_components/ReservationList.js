@@ -2,6 +2,7 @@
 import { useOptimistic, useTransition } from "react";
 import ReservationCard from "./ReservationCard";
 import { deleteBooking } from "../_lib/action";
+import Error from "next/error";
 
 function ReservationList({ bookings }) {
   const [isPending, startTransition] = useTransition();
@@ -14,10 +15,11 @@ function ReservationList({ bookings }) {
   async function handleDelete(bookingId) {
     startTransition(async () => {
       try {
-        console.log(bookingId, " start ");
         deleteOptimisticBooking(bookingId);
         await deleteBooking(bookingId);
-      } catch (error) {}
+      } catch (error) {
+        throw new Error(error.massage);
+      }
     });
   }
 

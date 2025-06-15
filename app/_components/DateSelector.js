@@ -1,6 +1,11 @@
 "use client";
 
-import { isWithinInterval } from "date-fns";
+import {
+  differenceInDays,
+  isPast,
+  isSameDay,
+  isWithinInterval,
+} from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { useResevation } from "./ResevationContext";
@@ -16,9 +21,15 @@ function isAlreadyBooked(range, datesArr) {
 }
 
 function DateSelector({ cabin, settings, bookedDates }) {
-  const { regularPrice, discount, numNights, cabinPrice } = cabin || {};
-  const { minBookingLength, maxBookingLength } = settings || {};
   const { range, setRange, resetRange } = useResevation();
+
+  const displayRange = isAlreadyBooked(range, bookedDates) ? {} : range;
+
+  const { regularPrice, discount } = cabin || {};
+  const { minBookingLength, maxBookingLength } = settings || {};
+
+  const numNights = differenceInDays(displayRange.to, displayRange.from);
+  const cabinPrice = numNights * (regularPrice - discount);
 
   return (
     <div className='flex flex-col justify-between '>
@@ -28,13 +39,17 @@ function DateSelector({ cabin, settings, bookedDates }) {
         captionLayout='dropdown'
         numberOfMonths={2}
         onSelect={setRange}
-        selected={range}
+        selected={displayRange}
         defaultMonth={new Date()}
         strartMonth={new Date()}
-        endMonth={new Date(2025, 8)}
+        endMonth={new Date(2026, 8)}
         min={minBookingLength + 1}
         max={maxBookingLength}
-        hidden={{ before: new Date() }}
+        // hidden={{ before: new Date() }}
+        disabled={(curDate) =>
+          isPast(curDate) ||
+          bookedDates.some((date) => isSameDay(date, curDate))
+        }
       />
 
       <div className='flex items-center justify-between px-8 bg-accent-500 text-primary-800 h-[72px]'>
@@ -65,7 +80,7 @@ function DateSelector({ cabin, settings, bookedDates }) {
           ) : null}
         </div>
 
-        {range?.from || range?.to ? (
+        {displayRange?.from || displayRange?.to ? (
           <button
             className='border border-primary-800 py-2 px-4 text-sm font-semibold'
             onClick={resetRange}

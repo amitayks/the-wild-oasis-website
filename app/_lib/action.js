@@ -7,6 +7,7 @@ import { getBookings } from "./data-service";
 import { redirect } from "next/navigation";
 
 export async function updateGuest(oldFormData, formData) {
+  console.log(formData);
   const session = await auth();
   const id = session?.user?.id;
 
@@ -66,6 +67,31 @@ export async function updateBooking(formData) {
 
   revalidatePath("/account/reservations");
   redirect("/account/reservations");
+}
+
+export async function createBooking(bookingData, formData) {
+  const session = await auth();
+  if (!session)
+    throw new Error("You must be signed in to create a reservation");
+  if (!bookingData || !formData) return;
+
+  const newBooking = {
+    ...bookingData,
+    numGuests: Number(formData.get("numGuests")),
+    observations: formData.get("observations"),
+    guestId: session.user.id,
+    isPaid: false,
+    extraPrice: 0,
+    totalPrice: bookingData.cabinPrice,
+    status: "unconfirmed",
+    hasBreakfast: false,
+  };
+
+  const { error } = await supabase.from("bookings").insert([newBooking]);
+  if (error) throw new Error(error.message);
+
+  revalidatePath(`/cabins/${bookingData.cabinId}`);
+  redirect("/account/thank-you");
 }
 
 export async function deleteBooking(bookingId) {
