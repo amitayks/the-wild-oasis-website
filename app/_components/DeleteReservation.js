@@ -15,7 +15,6 @@ function DeleteReservation({ bookingId, handleDelete }) {
   return (
     <button
       onClick={() => {
-        // console.log("click");
         handleDelete(bookingId);
       }}
       disabled={isPending}

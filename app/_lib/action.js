@@ -7,7 +7,6 @@ import { getBookings } from "./data-service";
 import { redirect } from "next/navigation";
 
 export async function updateGuest(oldFormData, formData) {
-  console.log(formData);
   const session = await auth();
   const id = session?.user?.id;
 
@@ -95,7 +94,6 @@ export async function createBooking(bookingData, formData) {
 }
 
 export async function deleteBooking(bookingId) {
-  console.log("click");
   const session = await auth();
   if (!session) throw new Error("You must be signed in to delete a booking");
 
