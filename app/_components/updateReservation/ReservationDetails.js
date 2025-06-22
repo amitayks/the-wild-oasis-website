@@ -1,10 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useId } from "react";
 import { useUpdateResev } from "./UpdateReservContext";
 
 export function ReservationDetails({ booking, cabin_maxCapacity }) {
   const { state, setState } = useUpdateResev();
+  const guestNumId = useId();
+  const observationId = useId();
+  const breakfastId = useId();
 
   useEffect(() => {
     setState({
@@ -32,7 +35,7 @@ export function ReservationDetails({ booking, cabin_maxCapacity }) {
       </h3>
 
       <div className='space-y-2'>
-        <label className='block text-primary-200 text-sm'>
+        <label htmlFor={guestNumId} className='block text-primary-200 text-sm'>
           How many guests?
         </label>
         <select
@@ -42,7 +45,7 @@ export function ReservationDetails({ booking, cabin_maxCapacity }) {
           className='w-full px-3 sm:px-4 py-2 sm:py-3 bg-primary-800 text-primary-100 rounded border border-primary-700 focus:outline-none focus:border-accent-500 text-sm sm:text-base'
         >
           {[...Array(cabin_maxCapacity)].map((_, i) => (
-            <option key={i + 1} value={i + 1}>
+            <option key={i} value={i + 1} id={guestNumId}>
               {i + 1} guest{i > 0 ? "s" : ""}
             </option>
           ))}
@@ -50,10 +53,14 @@ export function ReservationDetails({ booking, cabin_maxCapacity }) {
       </div>
 
       <div className='space-y-2'>
-        <label className='block text-primary-200 text-sm'>
+        <label
+          htmlFor={observationId}
+          className='block text-primary-200 text-sm'
+        >
           Anything we should know about your stay?
         </label>
         <textarea
+          id={observationId}
           name='observations'
           defaultValue={booking.observations}
           rows='4'
@@ -64,13 +71,17 @@ export function ReservationDetails({ booking, cabin_maxCapacity }) {
 
       <div className='flex items-center gap-3'>
         <input
+          id={breakfastId}
           type='checkbox'
           name='hasBreakfast'
           onClick={handleUpdateBreakfast}
           defaultChecked={booking.hasBreakfast}
           className='w-4 h-4 text-accent-500 bg-primary-800 border-primary-600 rounded focus:ring-accent-500'
         />
-        <label className='text-primary-200 text-sm sm:text-base'>
+        <label
+          htmlFor={breakfastId}
+          className='text-primary-200 text-sm sm:text-base'
+        >
           I want to add breakfast
         </label>
       </div>
