@@ -1,10 +1,6 @@
-import { BookingSummary } from "@/app/_components/updateReservation/BookingSummary";
-import { CabinDetails } from "@/app/_components/updateReservation/CabinDetails";
-import { GuestInformation } from "@/app/_components/updateReservation/GuestInformation";
-import { ReservationDetails } from "@/app/_components/updateReservation/ReservationDetails";
-
 import Header from "@/app/_components/updateReservation/Header";
-import { updateBooking } from "@/app/_lib/action";
+import { UpdateReservProvider } from "@/app/_components/updateReservation/UpdateReservContext";
+import UpdateReservForm from "@/app/_components/updateReservation/UpdateReservForm";
 import { auth } from "@/app/_lib/auth";
 import {
   getBooking,
@@ -12,8 +8,6 @@ import {
   getGuest,
   getSettings,
 } from "@/app/_lib/data-service";
-import UpdateReservForm from "@/app/_components/updateReservation/UpdateReservForm";
-import { UpdateReservProvider } from "@/app/_components/updateReservation/UpdateReservContext";
 
 export const generateMetadata = async ({ params }) => {
   const { editId } = await params;
@@ -39,7 +33,7 @@ export default async function Page({ params }) {
 
   return (
     <UpdateReservProvider>
-      <div className='min-h-screen bg-primary-950 text-primary-100'>
+      <div className='min-h-screen bg-primary-950 text-primary-100 -mx-4 sm:-mx-6 lg:-mx-8 -my-6 sm:-my-8 lg:-my-12'>
         <Header cabin={cabin} editId={editId} />
 
         <UpdateReservForm
@@ -53,17 +47,3 @@ export default async function Page({ params }) {
     </UpdateReservProvider>
   );
 }
-
-// const {
-//   startDate,
-//   endDate,
-//   numNights,
-//   numGuests,
-//   extraPrice,
-//   totalPrice,
-//   hasBreakfast,
-//   observations,
-//   cabinId,
-// } = booking;
-// const { id, name, maxCapacity, regularPrice, discount, description, image } =
-//   cabin;

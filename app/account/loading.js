@@ -2,9 +2,11 @@ import Spinner from "../_components/Spinner";
 
 export default function Loading() {
   return (
-    <div className='grid items-center justify-center h-full'>
+    <div className='flex flex-col items-center justify-center min-h-[50vh]'>
       <Spinner />
-      <p className='text-xl text-primary-200 mt-4'>Loading Your Info... </p>
+      <p className='text-lg sm:text-xl text-primary-200 mt-4'>
+        Loading Your Info...
+      </p>
     </div>
   );
 }

@@ -32,8 +32,33 @@
 
 /* For data picker */
 .rdp {
-  --rdp-cell-size: 32px !important;
+  --rdp-cell-size: 30px !important;
   --rdp-accent-color: theme("colors.accent.500") !important;
   --rdp-background-color: theme("colors.accent.600") !important;
+  --rdp-accent-color-hover: theme("colors.accent.700") !important;
+  --rdp-accent-color-active: theme("colors.accent.800") !important;
+  --rdp-accent-color-selected: theme("colors.accent.900") !important;
+  --rdp-accent-color-selected-hover: theme("colors.accent.800") !important;
+  --rdp-accent-color-selected-active: theme("colors.accent.700") !important;
+  --rdp-accent-color-selected-hover-text: theme("colors.accent.100") !important;
+  --rdp-accent-color-selected-text: theme("colors.accent.100") !important;
+  --rdp-accent-color-text: theme("colors.accent.100") !important;
+  --rdp-accent-color-hover-text: theme("colors.accent.100") !important;
+  --rdp-accent-color-active-text: theme("colors.accent.100") !important;
   margin: 0 !important;
 }
+/* 
+@keyframes rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+  } */

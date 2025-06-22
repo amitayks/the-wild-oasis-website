@@ -11,7 +11,7 @@ function UpdateProfileForm({ children, guest }) {
   return (
     <form
       action={formAction}
-      className='bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col'
+      className='bg-primary-900 py-6 px-6 sm:py-8 sm:px-12 text-base sm:text-lg flex gap-6 flex-col'
     >
       <div className='space-y-2'>
         <label>Full name</label>
@@ -19,7 +19,7 @@ function UpdateProfileForm({ children, guest }) {
           disabled
           name='fullName'
           defaultValue={fullName}
-          className='px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400'
+          className='px-4 sm:px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400'
         />
       </div>
 
@@ -29,7 +29,7 @@ function UpdateProfileForm({ children, guest }) {
           disabled
           name='email'
           defaultValue={email}
-          className='px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400'
+          className='px-4 sm:px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400'
         />
       </div>
 
@@ -39,7 +39,7 @@ function UpdateProfileForm({ children, guest }) {
           <img
             src={countryFlag}
             alt='Country flag'
-            className='h-5 rounded-sm '
+            className='h-5 rounded-sm'
           />
         </div>
 
@@ -51,16 +51,20 @@ function UpdateProfileForm({ children, guest }) {
         <input
           name='nationalID'
           defaultValue={nationalID}
-          className='px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm'
+          className='px-4 sm:px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm'
         />
       </div>
 
       <div className='flex justify-end items-center gap-6'>
         <button
           disabled={isPending}
-          className='bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300'
+          className='bg-accent-500 px-6 py-3 sm:px-8 sm:py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300'
         >
-          {isPending ? <SpinnerMini className='mx-10' /> : " Update profile"}
+          {isPending ? (
+            <SpinnerMini className='mx-6 sm:mx-10' />
+          ) : (
+            "Update profile"
+          )}
         </button>
       </div>
     </form>

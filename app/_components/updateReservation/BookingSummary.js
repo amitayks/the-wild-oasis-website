@@ -16,10 +16,12 @@ export function BookingSummary({
   const totalPrice = cabinPrice + totalBraekfastPrice;
 
   return (
-    <div className='bg-primary-900 p-6 rounded-lg space-y-4'>
-      <h3 className='text-xl font-semibold text-accent-400'>Booking Summary</h3>
+    <div className='bg-primary-900 p-4 sm:p-6 rounded-lg space-y-4'>
+      <h3 className='text-lg sm:text-xl font-semibold text-accent-400'>
+        Booking Summary
+      </h3>
 
-      <div className='space-y-3 text-primary-200'>
+      <div className='space-y-3 text-sm sm:text-base text-primary-200'>
         <div className='flex justify-between'>
           <span>Check-in:</span>
           <span className='font-medium text-primary-100'>
@@ -54,7 +56,7 @@ export function BookingSummary({
           </div>
         )}
         <hr className='border-primary-700' />
-        <div className='flex justify-between text-lg font-bold text-primary-100'>
+        <div className='flex justify-between text-base sm:text-lg font-bold text-primary-100'>
           <span>Total:</span>
           <span>${state.hasBreakfast ? totalPrice : cabinPrice}</span>
         </div>
@@ -63,7 +65,7 @@ export function BookingSummary({
       <div className='pt-4 space-y-3'>
         <button
           type='submit'
-          className='w-full bg-accent-500 hover:bg-accent-600 text-primary-900 font-semibold py-3 px-6 rounded transition-colors'
+          className='w-full bg-accent-500 hover:bg-accent-600 text-primary-900 font-semibold py-3 px-4 sm:px-6 rounded transition-colors text-sm sm:text-base'
         >
           Update reservation
         </button>

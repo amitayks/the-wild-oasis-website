@@ -6,19 +6,13 @@ import SpinnerMini from "./SpinnerMini";
 function DeleteReservation({ bookingId, handleDelete }) {
   const [isPending, startTransition] = useTransition();
 
-  // const handleDelete = () => {
-  //   startTransition(async () => {
-  //     handleDelete(bookingId);
-  //   });
-  // };
-
   return (
     <button
       onClick={() => {
         handleDelete(bookingId);
       }}
       disabled={isPending}
-      className='group flex items-center gap-2 uppercase text-xs font-bold text-primary-300 flex-grow px-3 hover:bg-accent-600 transition-colors hover:text-primary-900'
+      className='group flex items-center justify-center gap-2 uppercase text-xs font-bold text-primary-300 flex-grow px-3 py-3 hover:bg-accent-600 transition-colors hover:text-primary-900 w-full h-full'
     >
       {isPending ? (
         <div className='flex items-center justify-center w-full h-full'>

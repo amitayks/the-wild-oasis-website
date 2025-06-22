@@ -27,7 +27,7 @@ export function ReservationDetails({ booking, cabin_maxCapacity }) {
 
   return (
     <div className='space-y-4'>
-      <h3 className='text-xl font-semibold text-accent-400'>
+      <h3 className='text-lg sm:text-xl font-semibold text-accent-400'>
         Reservation Details
       </h3>
 
@@ -39,7 +39,7 @@ export function ReservationDetails({ booking, cabin_maxCapacity }) {
           name='numGuests'
           defaultValue={booking.numGuests}
           onChange={handleUpdateGuest}
-          className='w-full px-4 py-3 bg-primary-800 text-primary-100 rounded border border-primary-700 focus:outline-none focus:border-accent-500'
+          className='w-full px-3 sm:px-4 py-2 sm:py-3 bg-primary-800 text-primary-100 rounded border border-primary-700 focus:outline-none focus:border-accent-500 text-sm sm:text-base'
         >
           {[...Array(cabin_maxCapacity)].map((_, i) => (
             <option key={i + 1} value={i + 1}>
@@ -58,7 +58,7 @@ export function ReservationDetails({ booking, cabin_maxCapacity }) {
           defaultValue={booking.observations}
           rows='4'
           placeholder='Any pets, allergies, special requirements, etc?'
-          className='w-full px-4 py-3 bg-primary-800 text-primary-100 rounded border border-primary-700 focus:outline-none focus:border-accent-500 resize-vertical placeholder-primary-400'
+          className='w-full px-3 sm:px-4 py-2 sm:py-3 bg-primary-800 text-primary-100 rounded border border-primary-700 focus:outline-none focus:border-accent-500 resize-vertical placeholder-primary-400 text-sm sm:text-base'
         />
       </div>
 
@@ -70,7 +70,9 @@ export function ReservationDetails({ booking, cabin_maxCapacity }) {
           defaultChecked={booking.hasBreakfast}
           className='w-4 h-4 text-accent-500 bg-primary-800 border-primary-600 rounded focus:ring-accent-500'
         />
-        <label className='text-primary-200'>I want to add breakfast</label>
+        <label className='text-primary-200 text-sm sm:text-base'>
+          I want to add breakfast
+        </label>
       </div>
     </div>
   );

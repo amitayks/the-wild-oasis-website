@@ -14,8 +14,11 @@ export default async function UpdateReservForm({
   const breakfastPrice = await settings.breakfastPrice;
 
   return (
-    <div className='max-w-6xl mx-auto px-6 py-8'>
-      <form action={updateBooking} className='grid lg:grid-cols-2 gap-8'>
+    <div className='max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8'>
+      <form
+        action={updateBooking}
+        className='grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8'
+      >
         <input type='hidden' name='bookingId' defaultValue={bookingId} />
         {/* Left Column - Form */}
         <div className='space-y-6'>

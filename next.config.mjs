@@ -17,11 +17,6 @@ const nextConfig = {
       },
     ],
   },
-  // export: {
-  //   type: "static",
-  //   outdir: "dist",
-  // },
-  // output: "export",
 };
 
 export default nextConfig;

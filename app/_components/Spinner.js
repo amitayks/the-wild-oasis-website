@@ -12,7 +12,7 @@ const Spinner = () => {
 
   return (
     <div
-      className='mx-auto my-20 w-16 h-16 rounded-full'
+      className='mx-auto my-12 sm:my-20 w-12 h-12 sm:w-16 sm:h-16 rounded-full'
       style={spinnerStyle}
     ></div>
   );

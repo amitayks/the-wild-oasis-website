@@ -10,7 +10,7 @@ async function SelectCountry({ defaultCountry, name, id, className }) {
       name={name}
       id={id}
       defaultValue={`${defaultCountry}%${flag}`}
-      className={className}
+      className={`${className} text-sm sm:text-base`}
     >
       <option value=''>Select country...</option>
       {countries.map((c) => (

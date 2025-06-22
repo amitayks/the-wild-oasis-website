@@ -12,7 +12,7 @@ async function Resevation({ cabin }) {
   ]);
 
   return (
-    <div className='grid grid-cols-[700px_1fr] border border-primary-800 min-h-[400px]'>
+    <div className='grid grid-cols-1 lg:grid-cols-[700px_1fr] border border-primary-800 min-h-[400px]'>
       <DateSelector
         cabin={cabin}
         settings={settings}

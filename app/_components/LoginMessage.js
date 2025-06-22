@@ -2,8 +2,8 @@ import Link from "next/link";
 
 function LoginMessage() {
   return (
-    <div className='grid bg-primary-800 '>
-      <p className='text-center text-xl py-12 self-center'>
+    <div className='flex items-center justify-center bg-primary-800 p-8 sm:p-12'>
+      <p className='text-center text-base sm:text-xl'>
         Please{" "}
         <Link href='/login' className='underline text-accent-500'>
           login

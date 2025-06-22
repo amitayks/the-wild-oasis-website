@@ -3,9 +3,9 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 const filters = [
   { label: "All cabins", value: "all" },
-  { label: "1 - 2", value: "small" },
-  { label: "4 - 7", value: "medium" },
-  { label: "8 - 12", value: "large" },
+  { label: "1 - 2 guests", value: "small" },
+  { label: "4 - 7 guests", value: "medium" },
+  { label: "8 - 12 guests", value: "large" },
 ];
 
 function Fillter() {
@@ -21,7 +21,7 @@ function Fillter() {
   };
 
   return (
-    <div className='flex border border-primary-800 '>
+    <div className='flex border border-primary-800 overflow-x-auto scrollbar-hide'>
       {filters.map((f) => (
         <Button
           key={f.value}
@@ -39,7 +39,7 @@ function Fillter() {
 function Button({ fillter, handleFillter, activeFillter, children }) {
   return (
     <button
-      className={`px-5 py-2 hover:bg-primary-700 ${
+      className={`px-3 py-2 sm:px-5 hover:bg-primary-700 whitespace-nowrap text-sm sm:text-base ${
         activeFillter === fillter ? "bg-primary-700 " : ""
       }`}
       onClick={() => handleFillter(fillter)}

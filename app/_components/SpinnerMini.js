@@ -4,7 +4,7 @@ import React from "react";
 const SpinnerMini = ({ className = "", ...props }) => {
   return (
     <svg
-      className={`w-6 h-6 animate-spin ${className}`}
+      className={`w-5 h-5 sm:w-6 sm:h-6 animate-spin ${className}`}
       style={{ animation: "spin 1.5s linear infinite" }}
       fill='none'
       viewBox='0 0 24 24'
