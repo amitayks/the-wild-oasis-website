@@ -41,7 +41,7 @@ function SideNavigation() {
               href={link.href}
             >
               {link.icon}
-              <span>{link.name}</span>
+              <span className='hidden sm:block'>{link.name}</span>
             </Link>
           </li>
         ))}
